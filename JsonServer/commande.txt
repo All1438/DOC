@@ -1,0 +1,142 @@
+    // commande
+npm init -y = permet d'initier un project nodeJs et crée un fichier package.json
+npm install json-server = dependance json server
+
+    // ajouter dans le script dans package.json
+"scripts": {
+    "serve-json": "json-server --watch db.json --port 4000 --routes routes.json"
+        // --watch db.json = permet de spécifier quel est le données a traité
+        // --port = permet de personnalisé le port
+        // --routes routes.json = le fichier qui permet de personnalisé les routes
+}
+
+fichier: routes.json
+    "/api/v1/*": "/$1", 
+// indique que toutes les routes qui commencent par "/api/v1/" dans la requête seront redirigées vers la même route dans db.json
+    "/products/:category": "/products?category=:category"
+// Cette règle indique que lorsque la requête est faite vers "/products/{category}", elle sera redirigée vers "/products?category={category}" dans db.json
+ex: localhost:3OOO/products/electronics = permet d'afficher tout les products qui contient la catégorie égale a products
+
+la commande: npm run serve-json = permet de lancer l'homme page de json server dans le localhost
+
+    // GET (affiche les données)
+localhost:3000/products     = products est spécifier dans la BD.json
+{
+    "products": [
+        "id": 1,
+        "title": "product 1",
+        "category": "electronics",
+        "price": 4000
+    ]
+}
+
+localhost:3000/products/1  = permet d'afficher seulement les valeurs de la première 'id' (id:1)
+...
+
+    // Filtre
+localhost:3000/products?category=electronics = affiche seulement les products qui ont la category spécifique (ex: electronics)
+...
+localhost:3000/products?category=electronics&discount.type=shipping = permet d'afficher seulement les products qui a la category electronics et discount avec une type égale a shipping
+{
+    "id": 10,
+    "title": "Product 10",
+    "category": "electronics",
+    "discount": {
+        "type": "shipping"
+    }
+}
+
+    // Sort
+localhost:3000/products?_sort=price = permet de trier par ordre croissant de "price"
+...
+localhost:3000/products?_sort=price&_order=desc = permet de trier par ordre decroissant l'affichage des données de "price"
+...
+localhost:3000/products?_sort=price,category&_order=desc,asc = si les valeurs de la prix sont même alors la deuxième fonction après virgule sera executé
+...
+
+    // Pagination
+localhost:3000/products?_page=1 = permet d'afficher tout les données dans une seul page
+...
+localhost:3000/products?_page=1&_limit=2 = permet de limiter l'affichage de chaque page en 2 données
+[
+    {
+        ...
+    },
+    {
+        ...
+    }
+]
+
+    // Operators
+localhost:3000/products?price_gte=2000&price_lte=6000 = lister les produits dont le prix est supérieur ou égale à 2000 et inférieur ou égal à 6OOO
+...
+localhost:3000/products?category_like=^f = lister les produits qui a la category qui commence par la lettre 'f'
+...
+_gte  <=
+_lte  >=
+_ne   !=
+_like ==
+
+    // Full text Search
+localhost:3000/products?q=in  = lister les produits qui contient dans n'importe quel attributs le text in
+[
+    {
+        "id": 6,
+        "title": "Product 6",
+        "category": "gardeninig",  # le 'in' est ici
+        "price": 5000
+    }, {
+        "id": 10,
+        "title": "Product 10",
+        "category": "electronics",
+        "price": 3000,
+        "discount": {
+            "type": "shipping"  # le 'in' est ici
+        }
+    }
+]
+
+    // Relationships
+localhost:3000/products?_embend=reviews  = lister les produits avec leurs critiques
+{
+    "id": 3,
+    "title": "Product 3",
+    "category": "books",
+    "price": 1000,
+    "reviews": [
+        {
+            "id": 1,
+            "rating": 3,
+            "comment": "Review 1 for product id 3",
+            "productId": 3  # ils sont en relation car la clé étrangère du reviews et du même que la clé primaire du products
+        }
+    ]
+}
+...
+localhost:3000/products/1?_embed=reviews  = affiche seulement le premier la relation avec la première id
+...
+localhost:3000/reviews?_expand=products  = lister les critiques avec les détails des produits
+...
+_embed  OneToMany
+_expand  ManyToOne || OneToOne
+
+    // Extention in vsCode
+Thunder Client  = a utilisé pour effectuer des requêtes (similaire à Postman)
+
+    // POST (Création)
+localhost:3000/products  = permet d'effectuer la requête POST dans Thunder Client
+... #Nouvelles données
+
+    // PUT (Mis à jour)
+localhost:3000/products/11  = permet de mettre a jour la valeur de l'id 11
+... # données à mettre à jour
+
+    // PATCH (Mis à jour partielle)
+localhost:3000/products/11 = permet de faire une maj partielle de l'id 11
+{
+    "price": 8000
+}
+
+    // DELETE (Suppression)
+localhost:3000/products/11 = peremet de supprimer l'id 11
+

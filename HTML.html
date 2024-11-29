@@ -1,0 +1,353 @@
+<!--HTML:Structure de documents-->
+<!--déveloper.mozila.org tout les balises HTML Lien:réference des éléments html-->
+<!--Telecharger [affinity Designer] pour traiter les pixels des images-->
+<!--[paint] pour traiter les couleurs-->
+<!--Site:[W3C Validator] pour vérifier la page si il n'y a pas d'erreur-->
+<!--unsplash.com pour retrouver des images de bonne qualité gratuits-->
+<!--resizeimage.net pour resaisire une image-->
+<!DOCTYPE html>
+<html lang="fr"><!--lang=ce qui veut dire que la page est déstiné au français-->
+    <head>
+        <link rel="shortout icon" href="icone.png">
+        <!--link= une liaison entre HTML et les autres ressources -->
+        <!--On attribue dans #href le nom du resource -->
+        <!--rel=definit la relation entre une resource lié et le document actuel-->
+        <link rel="stylesheet" href=".css" media="screen">
+        <!--screen= c'est pour les écran d'ordinateur, -->
+        <!--media= permet de preciser le type de media que corespendre le type de CSS -->
+        <link rel="stylesheet" href="print.css" media="print"><!--print= servira pour le cas de l'impression-->
+        <meta charset="UTF-8"><!--meta:pour que le navigateur comprends l'ecriture-->
+        <meta name="description" content="Le resumé de HTML........"><!--content=contenue de la description-->
+        <meta name="keywords" content="Balise, Attribue, ....">
+        <!--mettre le #name="keywords" et dans le content="les mots clé de la page"-->
+        <!--cette meta là est beaucoup moins utilisé name="keywords"-->
+        <title>RESUME HTML</title>
+    </head>
+    <body>
+        <h1>Grand Titre:</h1><!--h1: Grand titre [h(1 a 5)]-->
+        <strong>Gras</strong><!--strong= mettre le texte en Gras-->
+        <br><!--saut a la ligne-->
+        <em>Italique</em><!--em= mettre le texte en Italique-->
+        <ul><!--ul= pour mettre un point au debut d'un liste[under ligne]-->
+            <li>
+                première liste
+                <!--imbriquée-->
+                <ol><!--ol= pour mettre un chiffre au debut du liste-->
+                    <li>première etape</li>
+                    <li>seconde etape</li>
+                </ol>
+            </li><!--li= les listes[liste]-->
+            <li>second liste
+                <ol>
+                    <li>première etape</li>
+                    <li>seconde etape</li>
+                </ol>
+            </li>
+        </ul>
+        <!--pour écrire un message on peut écrire par: 
+                        & = &amp;
+                        < = &lt;
+                        > = &gt; 
+                        " = quot;
+                        &nbsp; pour espacer les éléments -->
+        <pre><!--pre= pour representé les formules mathématique et les saut de ligne-->
+            7*1=7
+            7*2=14
+            7*3=21
+            7*4=28
+            7*5=35
+            7<sup>7</sup>=49
+            <!--sup= permet de faire une puissance-->
+        </pre>
+        <blockquote>Socrate="L'homme est un animale raisonnable"</blockquote>
+        <hr><!--hr= permet d'afficher un grosse ligne de séparateur-->
+       
+        <p class="important" id="texte">le Texte  çç</p>
+        <!--class=permettent de manipuler les éléments,via CSS ou JavaScript-->
+        <!--attribue #href="# suivie d'une phrase" doit être liée a l'id.Donc si on clic sur le texte le curseur se place automatiquement dans la zone de texte-->
+		<!--on peut agrandir le champ avec size-->
+       
+        <h1>Liens:</h1>
+        <nav><!--nav=permet de specifier qu'on est sur un élément de navigateur-->
+        <p>
+            <a href="menu.html" target="_blank" title="menu" rel="noreferrer">Voir le menu</a><br><br>
+            <!--title=Quand on passera sur le lien il affichera le title-->
+            <!--target="_blank" charger le contexte dans une nouvel ongle-->
+            <!--rel="noreferrer" = securité, permet de ne pas divulgué les information de referrer-->
+            <a href="#le texte" target="_blank" title="revenir au texte">le texte</a><br><br>
+            <!--le # suivie d'un phrase .c'est une lien interne-->
+            <a href="menu.html#should">should</a><br><br>
+            <!--quand on cliquera sur le lien should .l'affichage se placera dans la page menu.html a la place du should  -->
+            <a href="lesson/lesson_1.html" target="_blank">Voir la leçon_1</a>
+            <!--si la place du doccument est dans une dossier alors "écrire le nom du dossier suivie d'un /"-->
+             <!--a=pour passer d'une page a une autre-->
+            <!--On écris le nom de l'autre page dans l'attribue href-->
+            <!--ils affiches en violet si lien était déjà visité-->
+            <iframe src="menu.html" width="800" height="600" frameborder="2"></iframe>
+            <!--iframe=permet d'afficher d'autre page dans la page actuel en définit leur width et height-->
+            <!--frameborder=indique la taille du bordure de l' iframe-->
+            <!--iframe est trés utilisés avant mais maintenant c'est utiliser pour insérer des multimedia-->
+            <!--en entre dans le src le nom des autres pages ou ...-->
+        </p>
+        </nav>
+        <h1>Images:</h1>
+        <a href="image/jujutsu.jpg" target="_blank">
+            <!--a=permetra de voir l'image en grande taille en cliquant sur l'image-->
+        <img src="image/jujutsu.jpg" alt="sukuna le Démon a dix doigts" width="200" height="100">
+        </a><br>
+        <!--width=pour modifier la largeur de l'image [MAX=1900px]-->
+        <!--height=pour modifier la hauteur de l'image[MAX=1080px]-->
+        <!--alt=description de l'image [obligatoire]-->
+        <!--src=insertion de l'image .jpg, png, gif, svg-->
+        <!--Telecharger [affinity Designer] pour traiter les pixels des images-->
+
+        
+        <video src="" autoPlay loop muted/>
+        <!-- autoPlay = doit démarer automatiquement dès que la page est chargé-->
+        <!-- loop = indique que l'élément multimedia doit être lu en boucle -->
+        <!-- muted = indique que l'élément multimédia doit être lu sans son -->
+      
+        <h1>Tableau:</h1>
+        <table>
+            <caption>semeste 1</caption><!--qui contient le titre du taleau ou légende du tableau-->
+            <thead><!--thead:représente l'ensemble de ligne d'en tête du tableau-->
+                <tr><!--indique le debut et la fin d'une ligne du tableau-->	
+                    <th>UNITE D'ENSEIGNEMENT-ELEMENT CONSTITUTIFS</th><!--th la ligne d'en tête-->
+                    <th>crédit</th>
+                </tr>
+                <tr>
+                <th colspan="2">OUTILS SCIENTIFIQUES ET SYSTEME PHYSIQUE(OSSP)</th><!--colspan c'est la fusion de deux cellules verticales-->
+                </tr>
+            </thead>
+            <tbody><!--tbody=represente l'ensemble du corps du tableau-->
+            <tr>
+                <td>Electronique</td><!--indique le debut et la fin d'un contenu d'une cellule-->
+                <td><center>4</center></td>
+            </tr>
+            <tr>
+                <td>Base des systèmes numeriques</td>
+                <td><center>4</center></td>
+            </tr>
+            <tr>
+                <td>Mathématiques appliquées a l'informatique 1</td>
+                <td><center>4</center></td>
+            </tr>
+            <tr>
+                <th colspan="2">BASE DE L'INFORMATIQUE</th>
+            </tr>
+            <tr>
+                <td>Architecture des ordinateurs</td>
+                <td><center>6</center></td>
+            </tr>
+            <tr>
+                <td>Algorithmique</td>
+                <td><center>6</center></td>
+            </tr>
+            <tr>
+                <td>Technologie Web</td>
+                <td><center>6</center></td>
+            </tr>
+            </tbody>
+            <tfoot><!--tfoot= represente l'ensemble du pied du tableau-->
+
+            <tr>
+                <td><center>TOTAL</center></td>
+                <td><center>30</center></td>
+            </tr>
+            <tr>
+                <td colspan="2"><img src="image/jujutsu.jpg" alt="sukuna le Démon a dix doigts" width="200" height="100"></td>
+            </tr>
+            </tfoot>
+        </table> 
+        
+        <h1>Balise qui n'a pas de sens:</h1>
+        <div lang="fr"><!--div= une balise aucun sens qui sert a diviser le texte et proprio sert une tag au CSS ou JavaScript-->
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda minus totam facilis esse harum, sit numquam ut, quod doloremque aspernatur tempore aut voluptates optio alias quos consequuntur amet ipsum iusto.
+            Recusandae deleniti unde, eligendi ullam delectus non ut numquam voluptates natus inventore reprehenderit minima omnis vitae porro tempora eos doloribus incidunt fugiat fuga modi iusto at. Voluptatum laborum ut eos.
+            Ea quidem sed similique quam, sint fugiat amet dolor ipsa dolores eaque doloribus pariatur quae dignissimos qui cum perspiciatis deserunt aliquid ducimus animi. Sapiente assumenda doloribus similique quis officiis quidem.
+            Aliquid ea quibusdam sapiente repudiandae tempora facilis similique cumque, numquam commodi, at cupiditate nemo dolorem dignissimos pariatur excepturi iure voluptatum nobis, veritatis magni voluptatibus! At nobis pariatur sequi accusantium libero!
+            Soluta vitae quam <span class="Bigwords">My name is Ali Nando</span> nisi unde hic id nam accusamus sequi ullam totam a dolorem, porro illum laudantium consectetur numquam aliquid asperiores nostrum placeat? Ad debitis nemo magnam, possimus recusandae aperiam.</p>
+        <!--span=une balise aucun sens pour les contenus phrasés et proprio sert une Tag au CSS ou JavaScript-->
+        </div>
+        <div class="Bigtexte" lang="en"><!--Attribuer des balises pour bien les localisés dans le CSS ou JavaScript-->
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda minus totam facilis esse harum, sit numquam ut, quod doloremque aspernatur tempore aut voluptates optio alias quos consequuntur amet ipsum iusto.
+            Recusandae deleniti unde, eligendi ullam delectus non ut numquam voluptates natus inventore reprehenderit minima omnis vitae porro tempora eos doloribus incidunt fugiat fuga modi iusto at. Voluptatum laborum ut eos.
+            Ea quidem sed similique quam Ce qui ne tente rien n'a rien fugiat amet dolor ipsa dolores eaque doloribus pariatur quae dignissimos qui cum perspiciatis deserunt aliquid ducimus animi. Sapiente assumenda doloribus similique quis officiis quidem.
+            <article> ea quibusdam sapiente repudiandae tempora facilis similique cumque, numquam commodi, at cupiditate nemo dolorem dignissimos pariatur excepturi iure voluptatum nobis, veritatis magni voluptatibus! At nobis pariatur sequi accusantium libero!
+            Soluta vitae quam nisi unde hic id nam accusamus sequi ullam totam a dolorem, porro illum laudantium consectetur numquam aliquid asperiores nostrum placeat? Ad debitis nemo magnam, possimus recusandae aperiam.</article></p>
+        <!--article= même signification que le #div mais pour les articles ou des paragraphes spécifiée-->
+        </div>
+        <nav><!--permet de specifier qu'on est sur un élement de navigateur-->
+            <a href=""></a>
+        </nav>
+
+        <h1>Division de la page</h1>
+        <header><!--header=l'en tête de la page-->
+            <!--doit contenir:Des éléments de titre, éléments tel que le logo, un formulaire-->
+            <h1></h1>
+            <img src="" alt="">
+            <form action=""></form>
+        </header>
+        <main>
+            <!--main= qui contient le corps principales-->
+        </main>
+        <aside>
+            <!--aside=le contenue sur le côté-->
+        </aside>
+        <article>
+            <!--Un message de forum, un article de blog, une fiche produit, ou tout autre élément de contenu-->
+            <p></p>
+
+        </article>
+        <section>
+            <!--section= pour ce qui ne sont pas des articles-->
+        </section>
+        
+        <nav><!--nav= qui contient les lien-->
+            <ul>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+            </ul>
+        </nav>
+        <footer><!--footer=l'élément de pied de la page-->
+            <!---->
+        </footer>
+        <h1>Formulaire:</h1>
+        <form action="index.html">
+            <fieldset>
+                <!--fieldset= champ de texte dans pour les formulaires-->
+                <!--moins utilisé aujourd'hui-->
+                <legend>Nous contacter:</legend><!--legend= titre afficher du champ de texte-->
+                <div>
+                    <label for="emailinput">votre E-mail</label>
+                    <!--label= represente la légende pour un objet d'un interface-->
+                    <!--attribue For doit être liée a l'id.Donc si on clic sur le texte le curseur se place automatiquement dans la zone de texte-->
+                    <input type="email" name="email" id="emailinput" value="@gmail.com" placeholder="@gmail.com" size="20" autofocus>
+                    <!--autofocus= placer déjà le curseur sur le champ d'ecriture-->
+                    <!--size= définit la taille du champ-->
+                    <!--placeholder= Donner une indication ou astuce sur le contenue du champ-->
+                    <!--value= permetra une valeur par défaut au niveau du champ-->
+                    <!--[type="mail"] permet de vérifier si l' e-mail est valide-->
+                    <!--name: permetra de donné un nom au champ pour que le serveur comprends mieu [obligatoire]-->
+                </div>
+                <div>
+                    <label for="mdp">Mot de passe</label>
+                    <input type="password" id="mdp" name="mot de passe" diabled maxlength="16" minlength="8">
+                    <!--minlength= définit le nombre minimal de caractère que l'utilisateur peut saisir-->
+                    <!--maxlength= définit le nombre maximal de caractère que l'utilisateur peut saisir-->
+                    <!--disabled= indique que le champ est desactiver alors impossible d'écrire-->
+                    <!--[type="password"] pour ecrire le mot de passe-->
+                </div>
+                <div>
+                    <label for="nom">Nom:</label>
+                    <input type="text" id="nom" name="nom" required>
+                    <!--[type="text"] permet d'afficher le champ pour ecrire un texte-->
+                    <!--required= rendra le champ obligatoire-->
+                </div>
+                <div>
+                    <label for="prenom">Prénom:</label>
+                    <input type="hidden" name="first name" id="prenom">
+                    <!--[type="hidden"] permet de caché le champs-->
+                </div>
+                <div>
+                    <input type="checkbox" name="niveau" id="primaire" checked>
+                    <label for="primaire">Primaire</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="niveau" id="secondaire">
+                    <label for="secondaire">Secondaire</label>
+                    <!--[type="checkbox"] c'est une case a coché plusieurs éléments-->
+                </div>
+                <div>
+                    <input type="radio" name="sexe" id="masculin" checked>
+                    <!--checked= permet que ce champ là sera coché par défaut-->
+                    <!--[type="radio"] c'est une case a coché une seul élément-->
+                    <label for="masculin">Masculin</label>
+                </div>
+                <div>
+                    <input type="radio" name="sexe" id="feminin">
+                    <label for="feminin">Féminin</label>
+                </div>
+                <div>
+                    <label for="fileinput">Pièce jointe:</label>
+                    <input type="file" name="file" id="fileinput">
+                    <!--[type="file"] permet de joindre un fichier-->
+                </div>
+                <div>
+                    <label for="colorinput">Couleur préférer:</label>
+                    <input type="color" name="couleur" id="colorinput">
+                    <!--[type="color"] permet de séléctionner une couleur-->
+                </div>
+                <div>
+                    <label for="dateinput">Date:</label>
+                    <input type="datetime-local" name="date" id="dateinput">
+                    <!--[type="date"] permet de séléctionner une date -->
+                    <!--[type="datetime-local"] permet aussie de séléctionner l'heur a part la data -->
+                </div>
+                <div>
+                    <label for="numberinput">Numéro TEL:</label>
+                    <input type="tel" name="nombre" id="nupberinput">
+                    <!--[type="tel"] permet de saisir des numero de Telephone-->
+                </div>
+                <div>
+                    <label for="age">Votre age:</label>
+                    <input type="number" name="age" id="age">
+                     <!--[type="number"] permet de saisir seulement des nombres-->
+                </div>
+                <div>
+                    <input type="range" name="curseur">
+                    <!--[type="range"] permet de saisir un nombre dont la valeur exacte n'est pas importante-->
+                </div>
+                <div>
+                    <label for="sexe">Sexe:</label>
+                    <select name="sexe" id="sexe" multiple>
+                    <!--multiple= permet de faire une séléction multiple en appuyant sur le Cntrl-->
+                    <!--select= permet d'afficher une liste déroulante-->
+                        <optgroup label="sexe">
+                            <!--optgroup= permet de créer des sortes de groupe au niveau du select-->
+                        <!--label= ecrire nom du groupe d'option affiché par le navigateur. [attrubue obligatoire] --> 
+                            <option value="M">masculin</option>
+                            <!--option= les listes déroulantes-->
+                            <!--value= la valeur envoyer au serveur-->
+                            <option value="F" selected>feminin</option>
+                            <!--selected= séléction afficher par défaut-->
+                        </optgroup>
+                        <optgroup label="maturité">
+                            <option value="ma">Majeur</option>
+                            <option value="mi">Mineur</option>
+                        </optgroup>
+                           
+                    </select>
+                </div>
+                <div>
+                    <label for="message">Votre commentaire:</label>
+                    <textarea name="commentaire" id="message" cols="30" rows="10" placeholder="Votre message"></textarea>
+                    <!--textarea= permet de rentrer de texte sur plusieurs lignes-->
+                    <!--cols= nombre de colonne du champ-->
+                    <!--rows= nombre de ligne du champ-->
+                </div>
+                <div>
+                    <input type="submit" value="Envoyer le formulaire">
+                    <!--[type="submit"] permettre de soumettre le formulaire-->
+                    <!--value= la valeur afficher sur le bouton-->
+                    <input type="reset" value="annuler">
+                    <button>Envoyer seulement l'Email</button>
+                    <!--button= permet d'afficher un bouton-->
+                    <button type="reset">Annuler</button>
+                </div>
+            </fieldset>
+        </form>
+        <footer>
+            <address>VL 26 NAA Ambohibary</address><!--address= qui contient les contenu des adresses-->
+            <small>permet de représenter des commentaires ou des textes à écrire en petits caractères</small>
+        </footer>
+
+
+        <div className={`loader-container ${(!weatherData && !errorInfo) && "active"}`}> /* affichie la classeName active si weather et errorInfo sont null */
+        </div>
+
+
+        <h2>&#9782;</h2> <!-- &#9782; = c'est une icon de bare de menu -->
+    </body>
+</html>

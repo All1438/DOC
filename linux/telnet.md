@@ -1,0 +1,1 @@
+Pour vérifier la connectivité avec telnet, on peut exécuter la commande telnet depuis mon terminal en spécifiant l'adresse IP et le port qu'on souhaite tester. pour vérifier si l'emplacement est atteint par l'adresse IP

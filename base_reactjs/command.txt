@@ -1,0 +1,39 @@
+   // installation react:
+// Il faut installer node Js pour installer react
+// npx create-react-app nom-react = la commande qui permet de créer react est le nom-react ne doit pas être en majuscule est séparer d'un -
+// npm start = permet de lancer le go live dans le "localhost: 3000"
+// npm run build = permet de créer une version prête à être déployer de l'application
+// npm test = permet de lancer le test
+// npm list = permet de voir la liste des packages installer
+// npm install react-icons --save = permet de telecharger les icons dans react (site:react-icons)
+// npm install react-feather = qui facilite l'ajout d'icones SVG a l'app react (site:feathericon.com)
+// npm install swiper = permet de telecharger les slid dans react (site:swiperjs)
+// npm install emailjs-com --save = permet de relier avec le code avec l'E-mail (react emailjs)
+// npm install react-router-dom = permet d'ajouter des fonctionnalité de routage et créer une experience de navigation plus fluide pour les utilisateurs
+// npm install react-router-dom@5.3.0 = @version = permet de spécifier un version qu'on veut
+// npm install react-router-dom@next = permet d'installer le prochain version
+// npm install -D tailwindcss = permet de connecter React a Tailwindcss
+    // npx tailwindcss init = permet de créer un fichier 'tailwind.config.js' qui permet de personalisé différents aspects de Taliwindcss
+// npm install appwrite = permet d'interagir la l'API appwrite dans le project, facilite la creation d'app avec des fonctionnalités backend avancées (Site:cloud.appwrite.io)
+// npm i gh-pages --save-dev = permet de deployer un site web react sur GitHub
+        // script{
+            "predeploy": "npm run build",
+            "deploy": "gh-pages -d build"   // a ajouter dans package.json (pour son fonctionnement)
+        }
+    // npm run build   avant
+    // npm run deploy
+
+// npx create-vite = pour créer un nouveau project vite(le plus vite)
+// npm i (npm install) = pour installer les dépendances d'un project a partir d'un fichier json
+// npm run dev = permet de lancer le go live dans le localhost indiquer
+// npm install -D tailwindcss postcss autoprefixer = permet de connecter React-Vite a Tailwindcss
+    // npx tailwindcss init -p = permet de créer le fichier 'tailwind.config.js'
+
+    // parcel react:
+// npm init -y = permet d'initialiser le fichier package.JSON
+// npm add react react-dom = permet d'ajouter des packages react et react-dom dans le project
+// npm add -D parcel-bundler = permet d'installer parcel
+// npx parcel fichier_d'entrer = permet de lancer le go live dans le "localhost: 1234" après avoir installer parcel, fichier d'entrer(index.html)
+//pour publier l'application react: 
+    // -supprimer le dossier dist
+    // -npx parcel build fichier_d'enter = permet de minifier les codes dans un dossier dist

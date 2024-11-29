@@ -1,0 +1,274 @@
+/*CSS= Cascading Style Sheet*/
+/*CSS diner= est un site pour pratiquer le CSS*/
+/*devdocs.io pour se documenter de CSS en englais*/
+/*figma: est un application en ligne permet de cotroler les couleurs*/
+/*référence des éléments CSS= pour se documenter du CSS dans le net*/
+/*Telecharger affinity designer pour mieu traiter les couleurs*/
+/*site:block figma ] il y a des exercice de HTML*/
+/*[specificity calculator]=permet de calculer qui est le plus specifier, c'est dans le net*/
+/*[site:SVG] montre la compatibilité avec les navigateur*/
+/*[site:auto prefixer] permet de faire supporter avec les navigateur en copiant tout la syntaxe et il le modifie*/
+/*[site:google font] permet de trouver les polices et de les personalisés en copiant son CSS vers notre HTML dans le head*/
+
+/*google font = se trouve les import du font-family*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap'); 
+
+@font-face{
+    font-display: swap;/*swap= permet de mettre l'ancien police en attendant que le navigateur charge de la police personalisée*/
+    font-family: 'montserrat';/*type de la police*/
+    src: url() format();
+    /*url() = source de la police*/
+    /*format() = le format du police [se référer dans l'internet]*/
+    font-weight: 400;  
+}
+
+* { 
+    box-sizing:border-box;/*[box-sizing: border-box;]= Quand on défini la largeur ou le hauteur des éléments il prendra compte aussie les marges(c'est essenciel) */
+} /*[*]= pour cibler tout les éléments de HTML*/
+
+section > h2 { /* cible l'element h2 qui est le décendant direct de section*/
+
+}
+h1{
+    color:black;/*color= permet de changer la couleur du texte*/
+    font-size: 24px/*font-size= permet de changer la taille de la police*/
+    /*h1: sélecteur*/
+    /*color: propriété*/
+    /*black: valeur*/ 
+}
+.important{ /*[.important]=pour cibler les attribue class qui contient le mot important*/
+    color: red;
+}
+#texte{ /*[#texte]= pour cibler les attribue id qui contient le mot texte*/
+    font-size: 30px;
+}
+
+:root { /* :root = permet de cibler l'élément racine de l'arbre representant le document <html>*/
+    --personalise: #fff; /* --nom = représente des propriétés personalisés,  qui peuvent contenir une valeur qui pourra être réutilisée dans le document grâce à la fonction var */
+}
+h1 {
+    color: var(--personalise); /* color sera #fff */
+}
+
+div p{/*combinaison sélecteur.ça concerne les paragraphes dans div.*/
+    font-size: 20px;
+}
+div + p{/*ça concerne tout les paragraphes qui sont des voisins a coté de div*/
+    color :blue;
+}
+
+a[title="menu"]{/*permet de séléctionner un élément par rapport a son attribue*/
+
+}
+input[type="text"],input[type="mail"]{/*on peut combiner les règles avec un ,*/
+
+}
+a{
+    color:blue;
+}
+a:hover { /*[:hover]= permet de changer les règles si le curseur passe au dessue*/
+
+}
+a:visited{/*[:visited]=lorsque le lien a été déjà visiter*/
+
+}
+a:focus{/*[:focus]pour les gens qui navigue au clavier*/
+
+}
+p:first-child{/*affect seulement le premier child de balise p*/
+
+}
+p:nth-of-type(2){/*séléctinnera le 2eme paragraphe après le premier*/
+
+}
+a::after{ /*qui sera le dernier enfant de l'élément de a*/
+    content: " "; /*tjrs ajouter le content si on utilise after*/
+}
+p:nth-of-type(2n){/*séléctionnera tout les éléments qui sont multiples de 2(1sur2)*/
+    display: block;/*block= il va avoir une largeur et une hauteur et il va déclencher la passage a la ligne suivant*/
+    display: inline;/*inline= il ne fait que contourer l'élément. le cas par défaut des lien des span... */
+    display: flex; /*Lorsqu'un conteneur est défini comme flexible, les éléments qu'il contient peuvent être alignés*/
+    flex-direction: column; /*flex-direction: definit la façon des éléments fléxibles sont placés dans un conteneur flexible*/
+    /* column = place les éléments fléxible de manière verticale */
+    /* row = place les éléments fléxible de manière horizontale */
+    flex-wrap: wrap; /*flex-wrap: indique si les éléments flexibles sont contraints à être disposés sur une seule ligne ou s'ils peuvent être affichés sur plusieurs lignes avec un retour automatique*/
+    /*wrap = un retour automatique*/
+    /*nowrap = disposé sur une seule ligne*/
+    display: inline-block;/*inline-block= c'est une inline qui peut prendre une largeur et une hauteur */
+    /*si il y a un changement de display, les animations n'aura pas lieu*/
+    width: 0;
+    height: 0;
+
+    display: grid; /*grid= permet de diviser un espace en colonnes et en ligne*/
+    grid-template-columns: 35% 50%; /*grid-template-columns= permet de spécifié la largeur des columns du contenu(il y a 2 columns ici)*/
+    grid-template-rows: 40px 4em 40px; /*grid-template-rows*= permet de spécifié la hauteur de ligne du contenu(il y a 3 rows ici*/
+    grid-template-columns: 1fr 1fr; /*cela signifie que chaque colonne devrait occuper la moitié de la largeur du conteneur disponible*/
+    grid-template-rows: repeat(3, 1fr); /*permet de répéter 3fois le 1fr*/
+    gap: 10px 20px; /* gap = permet de definir les espaces entre les lignes et entres les colonnes d'une grille(10 rows et 20 columns)*/
+    /*c'est la propriété de row-gap et column-gap*/
+
+}
+html {
+    scroll-behavior: smooth; /*définit le comportement de défilement pour une boit*/
+}
+
+header{
+    background: gray;/*background= couleur de fond*/
+    padding: 20px;/*padding= marge intérieur*/
+    padding-left: 20px; /*on peut changer left par(right,top,bottom)*/
+    padding: 20px 10px; /*(top bottom) (right left)*/
+    padding: 20px 10px 5px 0;/*(top right bottom left)*/
+    margin:0;/*margin= marge extérieur*/
+    margin: 0 auto 1rem; /*applique une marge en haut 0 et en bas de 1rem et une marge horizontale automatique*/
+    /*auto = permet de donner l'effet de centrage dans son conteneur parent pour la marge gauche et droite*/
+}
+header img{
+    width: 40%;/*width= largeur peut representé par pixel,%*/
+    /*40% = que l"element aura une largeur de 40% de la largeur de son conteneur parent*/
+    width: max-content; /*max-content = la larjeur maximal du contenu*/
+    height: auto;/*height= hauteur [auto= l'image s'adapte au width pour ne pas déformer l'image]*/
+    height: 100vh; /* 100vh = signifie 100% de la fenêtre visible (vieport height) */
+    height: fit-content(); /*fit-content = la hauteur de l'élément s'adaptera automatiquement à la hauteur de son contenu*/
+    resize: both; /*resize = permet de contrôler le caractère redimensionnable d'un élément*/
+    /*both: l'ensemble de l'horizontale et verticale*/
+    /*none: ne peut pas être redimentionner*/
+}
+p{
+    color:#FFFFFF ;/*color= permet de definir la couleur de texte.#FFFFFF est la couleur Blanche en hexadécimal*/
+    color: inherit;/*inherit= la couleur est hérité de la couleur de parent*/
+    font-size:20px ;/*font-size= permet de définir la taille de la police*/
+    line-height:25px ;/*line-height= permet de définir l'hauteur entre les lignes suivant*/
+    letter-spacing:0.4px ;/*letter-spacing= permet de définir l'espace entre les lettres*/
+    font-family:Arial, Helvetica, sans-serif ;/*font-family= permet de définir la police a utilisé*/
+    /*si l'ordinateur du voisin n'a pas de Arial l'ordinateur utilisera alors Helvetica ou le sans-sérif*/
+    text-align:justify ;/*text-align= l'alignement du texte soit(left,right,center,justify)*/
+    /*affect seulement les types inline ou inline-block*/
+    text-align-last:right ;/*text-align-last= affect seulement la dérnière ligne du paragraphe*/
+    overflow-wrap: break-word;/* [overflow-wrap: break-word]=pour couper les mots trop longs et la mettre a la ligne*/
+    text-decoration: underline;/*[text-decoration: underline]= permet de souligné le texte et none pour ne pas mettre de soulignements*/
+    font-weight:400 ;/*font-weight= permet de faire une légèrement de la police ou trop gras*/
+    font-weight: bold; /* normal, bold(gras), lighter(fine)
+    /*il prendra une valeur entre(100 et 900)et le 400 c'est normal*/
+
+    text-indent:100px ;/*text-indent= permet s'écarter tout les premières lignes de chaque texte*/
+    text-transform: none ;/*valeur(capitalize) permet de de transformer tout les débuts des mots en majuscule*/
+    /*valeur(uppercase) permet de trasformer tout les lettres en majuscule*/
+
+    color: #090a;/*#090 est un couleur en hexadecimal est comme #009900 et (a) sercira a la transparence*/
+
+    color:hsl(hue, saturation, lightness) ;/*couleur mieu comprendre pour les humain. télécharger infinity design pour mieu comprendre*/
+    font-size: 30px;
+    margin: 1.5em;/*em= la marge fera 1.5fois de la taille du paragraphe*/
+    margin-bottom: 1.5rem;/*rem=  la marge en bas fera 1.5fois de la taille de la police général*/
+    opacity: 0.5; /*opacity= permet de rendre la transparence de la cible(image,texte,..)*/
+    transition: opacity 0.5s; /*transition: le durée  de changement sera 0.5s*/
+
+    letter-spacing: 3px; /*letter-spacing: permet d'espacer les lettres*/
+}
+p:first-of-type::first-letter{/*concerne seulement  le premier lettre du premier paragraphe*/
+    /*first-of-type= premier paragraphe*/
+    /*first-letter= premier lettre*/
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 16px;
+    outline: solid; /* une bordure exterieur simple*/
+    outline: dashed red; /* une bordure tiré tiré ---*/
+    outline: thick double; /* une double bordure*/
+    border-radius: 2rem; /* arrondissement de la bordure*/
+}
+header{
+    width:50% ;/*width= a 2 valeur en % ou pixel*/
+    height:20px ;/*height ne peut pas prendre de %*/
+    width: 50vmin;/*vmin= la valeur le plus petit. la largeur restera 50% même si l'ecran est rétrécie*/
+    width: 50vmax;/*vmax= la hauteur restera 50% même si l'ecran est rétrécie*/
+}
+
+header.nav{
+    position: static; /*[position:static;]= c'est la comportement par défaut. la comportement z-index, top, right,... ne s'applique pas */
+    /*la position et le padding ne peut pas être mélanger, qui permet de créer une Bug*/
+
+    position: absolute;/*[position:absolute;]= permet de positionner l'élément en une seul endroit et restera blocker*/
+    /*la position absolute se réfère a la position relative si il y a de position relative*/
+    left: 0;/*(left,right,top,bottom,width,heignt) =permet de positionner l'éléments*/
+    top: 0;
+    width: 100%;
+    margin: 20px 0;
+    text-align: center;
+    background: pink!important;/*[!important]= permet de dire qu'il est le plus importante et ne peut pas être ecraser par les autres*/
+
+    position: fixed;/*[position: fixed;]= permet de fixer l'élément par rapport au fenêtre*/
+    top: 0; /*la valeur finale de l'élément est déterminé par les valeurs de top, right, left et bottom*/
+
+    position: relative;/*[position: relative;]= permet de décaler l'éléments avec les propriété(left,right,top,bottom,width,heignt)*/
+    top: 200px;/*sa place sera 200px d'espace par rapport a top*/
+    z-index: 2; /*au deuxième position après le body*/
+
+    position: sticky;/*[position:sticky;]= permet de scroller comme le position fixid mais jusqu'a qu'il quitte son parent*/
+}
+
+header{
+    z-index: 3;/*z-index= permet de définir le profondeur qui sera au premier plan(le plus vue si la page izay mifanindry)*/
+    /*ce qui aura le z-index élever sera au premier plan*/
+    overflow: hidden; /*[overflow: hidden;]= pour calculer automatiquement la bonne hauteur et de cacher ce qui dépasse*/
+}
+img{
+    float: left;/*float= permet de faire floutter une image n'importe ou*/
+}
+hr{
+    clear: both;/*[clear:both]= effacer les float a paritir du hr pour qu'il ne se déborde pas(nettoye la precedante float*/
+    clear: left;/*seulement ce qui est la float a gauche*/
+
+}
+footer{
+    background: linear-gradient(to bottom,#000 ,#000800 ), url(...);/*background-image= permet de faire une image de fond*/
+    /*to bottom= de bas vers haut*/
+    /*45deg= 45degré de gauche vers droit*/
+    /*linear-gradient()= permet de faire une dégradation(essayer c'est cool)*/
+    /*to bottom= sa placement, #000= la couleur, #000800= son opaciter*/
+    background-repeat: no-repeat;/*background-repeat= permet de répéter l'image ou ne pas le répéter*/
+    background-position: bottom 20px right 30px; /*background-position= permet de positionner l'image*/
+    background-size:countain;/*background-size= permet de spécifier la taille de l'image*/
+    /*countain= il s'arrange pour que l'élément contient la totalité de l'image*/
+    background-size: cover;/*cover= il s'arrangera pour que l'image affect la totalité disponible*/
+    background-attachment: fixed;/*[background-attachment=fixed]= permet de coller le fond sur la page même si on scrolle*/
+    background:   
+            linear-gradient(to bottom, #000, #000800),
+            center top/cover url() fixed;
+            /*methode simple pour faire le background*/
+    background: linear-gradient(blue, transparent); /*linear-gradient(color, color) = permet de dégrader les couleurs de couleur vers couleur*/
+}
+img{
+    perspective: 500px;/*perspective= permet est la place du camera dans le design*/
+    /*transform= permet de modifier un image*/
+    transform: translate(120px ,50%);/*[translate()]=permet de déplacer l'élément par rapport a l'axe x et y*/
+    transform: scale(2);/*[scale()]= permet de rétrecir l'éléments ou agrandir. scale(2)= Agrandir *2 de l'éléments*/
+    transform: rotate(0.5turn);/*[rotate()]= permet de faire une rotation. 1turn= rotation 360deg*/
+    object-fit: cover; /*definit la façon dont le contenu d'un élément remplacé (img ou video)*/
+    aspect-ratio: 1/1; /*permet de définir les dimensions relative d'un élément par rapport largeur et hauteur de l'image à 1:1, l'image conservera cette proportion quelque soit sa taille*/
+
+
+}
+div{
+    border-radius: 50%; /*border-radius= permet d'arrondir la bordur*/
+    border: 1px solid; /*type= solid(normal), dashed(tirer tirer), tick double(double border), ridge(cadre)*/
+    cursor: pointer; /*cursor = definit la forme de curseur lorsque le pointeur est au dessus de d"element*/
+    /*pointer = curseur changent en main qui montre de doigt*/
+    /*wait = curseur changent en chargement*/
+    justify-content: center; /*justify-content: permet de justify le placement des le contenue dans l'espace*/
+    backdrop-filter: blur(15px); /*backdrop-filter= permet d'optenir un effet de flou ou de diffusion de la couleur sur la zone dérière l'élément*/
+    place-items: center start; /*place-items = definit les valeurs utilisés pour les align-items et justify-items*/
+    /*si il n'y a pas de seconde valeur fournie, c'est la première qui est fourni pour justify-items*/
+    /*align-items= la place de item par rapport a row*/
+    /*justify-items= la place de item par rapport a column*/
+}
+
+@media screen and (max-width: 1024px) { /*permet de faire une responsive*/
+    /* quand la largeur de l'ecran depasse 1024px alors execute les elements ci dessous */
+    div {
+        color: blue;
+    }
+}
+
+
+
+

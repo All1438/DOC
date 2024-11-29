@@ -1,0 +1,28 @@
+sudo apt install default-jdk
+sudo apt install default-jre
+java --version // permet de vérifier la version
+
+mvn archetype:generate -DgroupId=com.example -DartifactId=my-database-app -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false // permet de créer un nouveau projet Maven avec un structure de base.
+
+    install maven
+// sudo apt install maven
+// sudo apt wget
+//wget https://dlcdn.apache.org/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz
+//tar xvf apache-maven-3.9.6-bin.tar.gz // extract the file install in official site maven
+
+
+
+    // MCRepository
+pour rendre lo code indépendante
+
+
+    // install hibernate dans un projets
+- on crée un package resources dans le fichier source et on mets la configuration de hibernate.cfg.xml
+- Class HibernateUtil dans la fichier source. permet de gérer la creation et la gestion de sessions Hibernate. Une interface entre l'application Java et la base de données
+
+    // fonctionnement de hibernate
+new() = Transient
+session.persist() = persistent
+session.get() = persistent
+session.close() = Detached
+session.delete() = Removed
