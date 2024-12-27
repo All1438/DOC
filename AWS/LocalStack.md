@@ -1,6 +1,5 @@
 # Lancer LocalStack avec un volume
 docker run -it -p 4566:4566 -p 4571:4571 \
-  -v </chemin/vers/ton/dossier>:/mnt/local \ <!-- remplacer le path vers le dossier de choix sur ton système local. ce dossier sera accessible dans le conteneur-->
   --restart unless-stopped \
   -e SERVICES=<service>,<service> \
   localstack/localstack 
