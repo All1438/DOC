@@ -1,0 +1,1 @@
+[ParkInfo [parkLabel=Terminal C, parkId=2301, countLine=1], ParkInfo [parkLabel=Terminal A, parkId=2301, countLine=2]]

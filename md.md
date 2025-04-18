@@ -49,3 +49,6 @@ Utiliser `>` au début de la ligne pour créer une citation.
 
 ` ` c'est comme un titre
 
+
+# Racourcis
+Ctrl + Shift + V <!--permet de le traduire en pdf le format md-->

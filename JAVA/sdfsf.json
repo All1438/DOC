@@ -1,0 +1,45 @@
+{
+    "name": "Payment pre prod",
+    "request": {
+        "auth": {
+            "type": "basic",
+            "basic": [
+                {
+                    "key": "password",
+                    "value": "@VzPyhbqnkRzF!",
+                    "type": "string"
+                },
+                {
+                    "key": "username",
+                    "value": "wstestaerodfw",
+                    "type": "string"
+                }
+            ]
+        },
+        "method": "POST",
+        "header": [
+            {
+                "key": "Content-Type",
+                "value": "application/json"
+            }
+        ],
+        "body": {
+            "mode": "raw",
+            "raw": "{\"location\":\"TESTS\",\r\n  \"requestId\":\"test_ble_25_0001\",\r\n  \"bookingIdExt\":\"test_ble_25_0001\",\r\n  \"totalPrice\":100.0,\r\n  \"parkingFees\":100.0,\r\n  \"parkingDiscount\":0.0,\r\n  \"bookingFees\":0.0,\r\n  \"bookingDiscount\":0.0,\r\n  \"insuranceFees\":0.0,\r\n  \"couponId\":null,\r\n  \"couponAmount\":0,\r\n  \"parkName\":\"LBA-Yorkshire\",\r\n  \"offerId\":0,\r\n  \"nbCars\":4,\r\n  \"source\":\"test\",\r\n  \"dateBegin\": \"2025-02-15T09:12:00\",\r\n  \"dateEnd\": \"2025-02-21T22:10:00\",\r\n  \"dateRequest\": \"2025-02-07T16:21:08\"}"
+        },
+        "url": {
+            "raw": "https://apipreprod.parkedition.com/payment",
+            "protocol": "https",
+            "host": [
+                "apipreprod",
+                "parkedition",
+                "com"
+            ],
+            "path": [
+                "payment"
+            ]
+        }
+    },
+    "response": []
+
+}

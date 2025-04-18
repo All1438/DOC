@@ -129,3 +129,7 @@ sudo nano /etc/gdm3//custom.conf // permet de modifier la permission du server d
 *decommenter la line "WaylandEnable=false"
 *Modifier la line "AutomaticLogin=user1" to "AutomaticLogin=$USERNAME"
 *Decommenter les deux lines "AutomaticLoginEnable=true" et "AutomaticLogin=$USERNAME"
+
+
+ping google.com <!--permet de tester la connectivité réseau entre votre machine et le serveur de Google en envoyant des paquets ICMP (Internet Control Message Protocol)-->
+

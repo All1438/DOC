@@ -299,3 +299,360 @@ Il existe trois types de tests :
     <artifactId>quarkus-micrometer-registry-prometheus</artifactId> 
 </dependency>
 En résumé, la métrologie dans Quarkus avec Cloud-Ready permet de surveiller et d'optimiser les performances des applications dans un environnement cloud. Grâce à des extensions comme SmallRye Metrics et SmallRye Health, vous pouvez collecter des métriques, surveiller la santé de vos services, et intégrer ces données dans des systèmes de gestion de cloud, offrant ainsi plus de visibilité et de contrôle sur le fonctionnement de votre application en production
+
+# OpenTracing et OpenTelemetry
+OpenTracing et OpenTelemetry sont des outils pour le tracing distribué, qui aident à surveiller et à déboguer les applications distribuées. Dans le cadre de Quarkus, ces technologies permettent de tracer les requêtes à travers plusieurs services pour comprendre les performances et détecter les problèmes.
+
+## OpenTracing dans Quarkus
+**Principe:** OpenTracing fournit une API standardisée pour le traçage distribué. Il permet de suivre une requête d'un service à l'autre et de collecter des données sur son parcours (traces).
+**Config:** ./mvnw quarkus:add-extension -Dextensions="quarkus-opentracing"
+        - Application.properties
+        quarkus.jaeger.service-name=my-service
+        quarkus.jaeger.endpoint=http://localhost:14268/api/traces
+        quarkus.jaeger.sampler-type=const
+        quarkus.jaeger.sampler-param=1
+
+## OpenTelemetry dans Quarkus
+**Principe:** OpenTelemetry est l'évolution d'OpenTracing et d'OpenCensus. Il unifie le traçage distribué, la collecte de métriques et le logging.
+**Config:** ./mvnw quarkus:add-extension -Dextensions="quarkus-opentelemetry"
+        - Application.properties
+        quarkus.opentelemetry.tracer.exporter.otlp.endpoint=http://localhost:4317
+        quarkus.opentelemetry.tracer.exporter.otlp.enabled=true
+        quarkus.opentelemetry.tracer.sampler-probability=1.0
+
+## fonctionnalités communes
+`Injection automatique des spans :`
+Avec les extensions, Quarkus injecte automatiquement les traces dans vos appels REST, Kafka, JDBC, etc.
+`Instrumentation automatique :`
+Pas besoin de beaucoup de code supplémentaire : Quarkus instrumente automatiquement les frameworks courants (resteasy, Hibernate, etc.).
+`Visualisation des traces :`
+Les traces collectées peuvent être envoyées à des outils comme Jaeger ou Zipkin pour une analyse graphique.
+
+| **Aspect**          | **OpenTracing**             | **OpenTelemetry**          |
+|----------------------|-----------------------------|-----------------------------|
+| **Standard**         | Ancien standard            | Remplace OpenTracing        |
+| **Fonctionnalités**  | Traçage uniquement         | Traçage, métriques, logging |
+| **Support Quarkus**  | `quarkus-opentracing`      | `quarkus-opentelemetry`    |
+| **Évolution**        | Déprécié (non maintenu)     | Actif et recommandé         |
+
+# tolérance à la pannes
+**Principe:** dans Quarkus est basée sur la spécification MicroProfile Fault Tolerance, qui fournit des mécanismes pour gérer les erreurs et maintenir la résilience des applications. Elle permet de définir des stratégies comme les timeouts, les circuits breakers, les tentatives automatiques (retries), et le fallback. Voici comment cela fonctionne 
+**Config:**  ./mvnw quarkus:add-extension -Dextensions="quarkus-smallrye-fault-tolerance"
+## Activation via annotations
+| **Annotation**      | **Fonction**                                                                                           |
+|----------------------|-------------------------------------------------------------------------------------------------------|
+| `@Retry`            | Relance automatiquement une opération en cas d'échec.                                                |
+| `@Timeout`          | Définit un délai limite pour qu'une opération se termine, sinon elle échoue.                          |
+| `@CircuitBreaker`   | Interrompt temporairement les appels vers une méthode en cas d'échecs répétés.                        |
+| `@Fallback`         | Définit une méthode alternative à appeler en cas d'échec.                                            |
+| `@Bulkhead`         | Limite le nombre d'exécutions simultanées d'une méthode pour éviter la surcharge du système.          |
+
+## Dev UI
+Le dev UI de Quarkus pour la tolérance à la panne est un outil puissant qui facilite la compréhension, la surveillance et l'optimisation des stratégies de résilience dans votre application.
+./mvnw quarkus:dev
+http://localhost:8080/q/dev <!--Accéder au dev UI-->
+
+# GraalVM
+### Principe de GraalVM avec Quarkus
+
+| **Aspect**                      | **Description**                                                                                   |
+|----------------------------     |---------------------------------------------------------------------------------------------------|
+| **Démarrage ultra-rapide**      | Les applications compilées avec GraalVM démarrent en quelques millisecondes.                     |
+| **Faible consommation mémoire** | Les binaires natifs consomment beaucoup moins de mémoire qu'une JVM traditionnelle.         |
+| **Portabilité**                 | Les binaires natifs sont autonomes et ne nécessitent pas de JVM pour être exécutés.              |
+| **Idéal pour le cloud**         | Réduction des coûts grâce à une empreinte mémoire et un temps de démarrage faibles.              |
+| **Intégration avec Kubernetes** | Les microservices compilés en natif fonctionnent parfaitement dans des environnements containers. |
+
+---
+
+### Fonctionnement de GraalVM avec Quarkus
+
+| **Étape**                  | **Description**                                                                                   |
+|----------------------------|---------------------------------------------------------------------------------------------------|
+| **Phase de développement** | En mode JVM, Quarkus fonctionne comme une application Java classique, avec live reload.          |
+| **Compilation native**     | Utilisation de GraalVM pour générer un binaire natif via SubstrateVM lors du build.               |
+| **Exécution native**       | Le binaire natif est autonome et peut être exécuté directement sans JVM.                         |
+| **Optimisations**          | GraalVM élimine les chemins de code inutiles, optimise les reflections et génère du code efficace.|
+
+---
+
+### Avantages de GraalVM avec Quarkus
+
+| **Avantage**               | **Description**                                                                                   |
+|----------------------------|---------------------------------------------------------------------------------------------------|
+| **Démarrage rapide**       | Les binaires natifs démarrent instantanément.                                                    |
+| **Faible empreinte mémoire** | Les applications consomment moins de ressources en production.                                |
+| **Adapté aux containers**  | Applications légères et optimisées pour Kubernetes.                                             |
+| **Portabilité**            | Les binaires peuvent être exécutés sur différents systèmes sans JVM.                            |
+| **Réduction des coûts**    | Moins de ressources nécessaires, idéal pour les environnements cloud et serverless.             |
+
+---
+
+### Limitations de GraalVM avec Quarkus
+
+| **Limitation**             | **Description**                                                                                  |
+|----------------------------|--------------------------------------------------------------------------------------------------|
+| **Support des APIs limité** | Certaines parties de la bibliothèque standard Java nécessitent des configurations spéciales.    |
+| **Temps de compilation**    | La compilation native peut être plus longue que la compilation JVM classique.                   |
+| **Taille des binaires**     | Les binaires natifs peuvent être plus volumineux que les fichiers `.jar`.                       |
+| **Compatibilité des librairies** | Certaines librairies Java nécessitent des ajustements pour fonctionner correctement avec GraalVM. |
+
+
+
+## Compilation native avec Quarkus
+`execution en mode JVM`
+./mvnw quarkus:dev
+
+`Compilation et exécution en mode natif`
+Maven: ./mvnw package -Pnative
+CLI: quarkus build --native
+<!-- Le binaire natif sera généré dans le dossier target ou build. Par exemple -->
+target/my-app-runner
+
+## Cas d'utilisation
+**Serverless :** Utilisez un binaire natif pour AWS Lambda ou Google Cloud Functions.
+**Microservices :** Démarrage ultra-rapide et faible consommation pour Kubernetes.
+**Environnements embarqués :** Applications légères pour l’IoT ou l’edge computing.
+
+## Monitoring et débogage
+Déboguer et monitorer une application native compilée avec GraalVM nécessite des outils et des pratiques spécifiques, car les binaires natifs n’offrent pas les mêmes mécanismes de débogage qu’une JVM classique
+
+### Ajout de symboles de débogage pendant la compilation
+`./mvnw package -Pnative -Dquarkus.native.debug.enabled=true`
+Cela permet d'inclure des symboles de débogage dans le binaire natif, ce qui facilite l'analyse avec des outils comme GDB
+
+### Utilisation de GDB pour le débogage
+`sudo apt install gdb`
+**Executer avec GBD**
+Lancez votre binaire natif avec GDB:
+`gdb ./target/my-app-runner`
+Une fois dans GDB, démarrez le programme :
+`run`
+Si le programme plante, vous pouvez afficher la pile d'appels:
+`backtrace`
+Ajoutez des points d'arrêt pour analyser le comportement :
+`break main`
+
+### Outils/Techniques
+| **Aspect**          | **Outils/Techniques**                                     |
+|-------------------  |----------------------------------------------------------|
+| **Débogage**        | GDB, symboles de débogage, logs détaillés                 |
+| **Monitoring**      | Prometheus, Grafana, OpenTelemetry (Jaeger, Zipkin)       |
+| **Profiling**       | perf, GraalVM Dashboard                                   |
+| **Tests de charge** | JMeter                                                 |
+| **Kubernetes**      | Probes (liveness/readiness), intégration Prometheus/Kiali/Jaeger |
+
+### Différence entre Débogage JVM et Native
+| **Aspect**          | **Débogage JVM**                            | **Débogage natif (GraalVM)**            |
+|---------------------|---------------------------------------------|-----------------------------------------|
+| **Environnement**   | JVM avec introspection dynamique            | Binaire natif sans machine virtuelle    |
+| **Outils principaux** | IntelliJ, Eclipse, JVisualVM, JProfiler   | GDB, perf, OpenTelemetry                |
+| **Exceptions**      | Pile d’appels détaillée                     | Pile brute si symboles activés          |
+| **Profiling**       | Flight Recorder, VisualVM                   | perf, Valgrind                          |
+| **Logs et traces**  | SLF4J, Logback                              | Logs intégrés, OpenTelemetry            |
+| **Portabilité**     | Identique sur toutes les plateformes        | Dépendant de la plateforme cible        |
+
+
+
+# déboguer une application native sur VSCode de bout en bout
+## Prérequis
+**extension:** 
+Debugger for Java (optionnel si vous utilisez un environnement mixte).
+Native Debug : Une extension pour déboguer les binaires natifs
+Compiler l’application avec des symboles de débogage
+./mvnw package -Pnative -Dquarkus.native.debug.enabled=true
+
+**Installer GDB:**
+
+## Configuration VSCode
+fichier .vscode/launch.json:
+``` json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Native App",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/target/my-app-runner", // Chemin vers le binaire natif
+      "args": [], // Arguments de ligne de commande pour l'application
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
+ ```
+**Points clés de la configuration :**
+`program :` Chemin du fichier binaire compilé (généralement dans target/).
+`args `: Arguments à passer à l'application (par exemple, paramètres de démarrage).
+`MIMode `: Défini sur gdb, car GDB est utilisé pour déboguer les binaires natifs.
+
+# Google Cloud Functions
+Google Cloud Functions est un service de computing serverless proposé par Google Cloud Platform (GCP). Il permet de déployer et exécuter des fonctions dans le cloud sans se préoccuper de la gestion des serveurs ou de l'infrastructure.
+
+## Principe de fonctionnement
+### Evénements déclencheurs:
+Google Cloud Functions s’exécute en réponse à des événements. Ces événements peuvent provenir de diverses sources :
+***HTTP :*** Une requête HTTP déclenche la fonction.
+***Cloud Pub/Sub :*** Un message publié sur un topic déclenche la fonction.
+***Cloud Storage :*** Un événement sur un fichier (création, modification, suppression) déclenche la fonction.
+***Firebase :*** Événements provenant de Firebase, comme des mises à jour en base de données.
+***Cloud Scheduler :*** Programmation de fonctions pour s’exécuter à intervalles réguliers.
+
+### Environnement serverless:
+Pas besoin de provisionner ou de gérer des serveurs.
+Les fonctions s'exécutent dans un environnement isolé.
+Les ressources (CPU, mémoire) sont allouées automatiquement en fonction de la demande.
+
+### développement basé sur des fonctions:
+Chaque Google Cloud Function est une fonction unique, définie par le développeur, et exécutée en réponse à un événement.
+Les fonctions peuvent être écrites dans plusieurs langages supportés : Node.js, Python, Go, Java, C#, Ruby.
+
+### Scalabilité automatique:
+Les fonctions scalent automatiquement selon la charge :
+Une seule invocation de fonction peut être gérée.
+Des centaines ou des milliers d’instances de la fonction peuvent être exécutées en parallèle si nécessaire
+
+### Exécution stateless :
+Les fonctions sont stateless, c'est-à-dire qu'elles n'ont pas de persistance locale entre les invocations.
+Toute persistance doit être gérée via des services externes comme Cloud Storage, Firestore ou une base de données
+
+### Avantages:
+***Optimisation des coûts :*** Facturation basée uniquement sur le temps d’exécution et la quantité de ressources consommées.
+***Intégration GCP native :*** Facilement connecté aux autres services Google Cloud (Pub/Sub, Storage, Firebase, etc.).
+
+### Limitation et défis:
+***Durée d'exécution limitée :***
+Une fonction peut s'exécuter jusqu’à un maximum de 9 minutes.
+Pour des traitements longs, utilisez des alternatives comme Cloud Run ou des workflows.
+***Cold starts :***
+Si une fonction n'a pas été utilisée depuis un certain temps, il peut y avoir un délai de démarrage (cold start).
+Utiliser des techniques comme le maintien actif (keep-alive) pour minimiser ce délai.
+
+***Dépendances externes :***
+Si votre fonction nécessite des bibliothèques externes, elles doivent être empaquetées et déployées avec le code
+
+### Outils pour déboguer et tester
+***Tests locaux :***
+Google propose des outils comme functions-framework pour exécuter et tester les fonctions localement.
+***Supervision :***
+Intégration avec Cloud Logging et Error Reporting pour traquer les erreurs.
+
+Etapes pour utiliser Google Cloud Functions avec Quarkus
+./mvnw quarkus:add-extension -Dextensions="google-cloud-functions-http"
+**Configurer le packaging** 
+<plugin>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-maven-plugin</artifactId>
+    <version>${quarkus.version}</version>
+    <executions>
+        <execution>
+            <goals>
+                <goal>build</goal>
+            </goals>
+        </execution>
+    </executions>
+    <configuration>
+        <output-target>google-cloud-functions</output-target>
+    </configuration>
+</plugin>
+
+**Compiler**
+./mvnw package
+
+
+
+# Comparaison entre SAM et Google Cloud Function
+| **Aspect**                   | **AWS SAM**                                                       | **Google Cloud Functions**                                  |
+|------------------------------|-------------------------------------------------------------------|-------------------------------------------------------------|
+| **Définition**                | Framework pour déployer des applications serverless sur AWS.      | Service géré pour exécuter des fonctions cloud sur Google Cloud. |
+| **Déploiement**               | Utilise des modèles YAML pour définir et déployer des stacks CloudFormation. | Déploiement simple via `gcloud` ou la console Google Cloud. |
+| **Écosystème**                | Spécifique à AWS (Lambda, API Gateway, S3, etc.).                | Spécifique à Google Cloud (Pub/Sub, Storage, etc.).          |
+| **Types d'événements**        | Large support (HTTP, S3, DynamoDB, SNS, etc.).                   | Supporte HTTP, Pub/Sub, Cloud Storage, Firestore, etc.      |
+| **Langages supportés**        | Java, Python, Node.js, Go, Ruby, etc.                            | Java, Python, Node.js, Go, .NET, etc.                       |
+| **Gestion des dépendances**   | Dépend de l'environnement du runtime AWS Lambda.                 | Gère les dépendances via le runtime Google Cloud.           |
+| **Personnalisation**          | Très flexible grâce aux modèles SAM et CloudFormation.           | Personnalisation limitée, orientée vers la simplicité.      |
+| **Portabilité**               | Déploiement principalement sur AWS, mais exportable via des outils tiers. | Déploiement natif sur Google Cloud, moins portable.         |
+| **Performances**              | Démarrage rapide, optimisé pour AWS Lambda.                      | Démarrage rapide, optimisé pour Google Cloud Functions.     |
+| **Monitoring et logs**        | AWS CloudWatch pour logs et métriques.                           | Google Cloud Monitoring et Logging pour logs et métriques.  |
+| **Outils CLI**                | `sam` CLI pour déploiement et tests locaux.                      | `gcloud` CLI pour gestion des fonctions.                    |
+| **Interopérabilité**          | Intégration facile avec d'autres services AWS.                   | Intégration facile avec d'autres services Google Cloud.     |
+| **Flexibilité de la configuration** | Hautement configurable avec SAM templates.                    | Configuration simple via CLI ou Console.                    |
+
+# Framework comme SAM:
+| **Outil/Framework**           | **Description**                                                                                   | **Écosystème**            | **Similarité avec SAM**                                                                                      |
+|-------------------------------|---------------------------------------------------------------------------------------------------|---------------------------|-------------------------------------------------------------------------------------------------------------|
+| **Serverless Framework**      | Framework open-source pour déployer des applications serverless sur plusieurs plateformes.       | AWS, Google Cloud, Azure, etc. | Approche multi-cloud, plus flexible que SAM, mais avec une courbe d'apprentissage plus large.              |
+| **CloudFormation**            | Service d'infrastructure-as-code pour gérer des ressources AWS.                                 | AWS                       | SAM est un sur-ensemble simplifié de CloudFormation pour les workloads serverless.                         |
+| **AWS CDK (Cloud Development Kit)** | Infrastructure-as-code via des langages de programmation (TypeScript, Python, Java, etc.).       | AWS                       | Plus orienté développeur, permet de définir des applications serverless avec un contrôle précis.           |
+| **Google Deployment Manager** | Service d’infrastructure-as-code pour définir des ressources sur Google Cloud.                  | Google Cloud              | Comparable à CloudFormation, mais pour l’écosystème Google. Moins optimisé pour serverless.                |
+| **Google Cloud Run**          | Plateforme serverless pour exécuter des conteneurs, semblable à AWS Lambda dans un contexte conteneurisé. | Google Cloud              | Moins spécifique aux fonctions que SAM, plus adapté aux workloads conteneurisés.                           |
+| **Azure Resource Manager (ARM)** | Infrastructure-as-code pour gérer des ressources sur Azure.                                   | Azure                     | Équivalent de CloudFormation/SAM pour Azure, mais avec une approche centrée sur les ressources.            |
+| **Terraform**                 | Outil open-source pour gérer l'infrastructure sur plusieurs clouds avec une approche déclarative. | Multi-cloud               | Alternative multi-cloud populaire, plus flexible mais pas spécifique aux applications serverless.          |
+| **Pulumi**                    | Outil d’infrastructure-as-code utilisant des langages de programmation.                         | Multi-cloud               | Similaire au CDK, mais multi-cloud et plus orienté développeur que SAM.                                    |
+| **Knative**                   | Framework pour exécuter des workloads serverless sur Kubernetes, souvent utilisé avec Cloud Run. | Kubernetes                | Moins spécifique que SAM, centré sur les applications conteneurisées et Kubernetes.                        |
+
+
+# SAM
+AWS SAM (Serverless Application Model) est un framework de développement pour la création et le déploiement d'applications serverless sur AWS. Il permet de définir facilement des ressources serverless telles que AWS Lambda, API Gateway, DynamoDB, S3, et d'autres services AWS dans un fichier de configuration
+
+***template.yaml***
+``` yml
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31' # Transform : Cette directive indique à CloudFormation que ce modèle est un modèle SAM
+Description: this is a description
+
+Parameters: # La section Parameters est utilisée pour déclarer des paramètres dynamiques qui peuvent être spécifiés au moment du déploiement
+  Environment:
+    Type: String # Indique que ce paramètre est une chaine de caractère
+    Default: "preprod" # Si l'utilisateur ne fournit pas de valeur pour ce paramètre au moment du déploiement, la valeur par défaut sera utilisée
+    AllowedValues: # Spécifie une liste des valeurs acceptées pour ce paramètre
+      - preprod
+      - prod
+
+Resources: #  C'est la section où les ressources AWS sont définies
+  HelloWorldFunction: # doit être descriptif et indique ce que fait la ressource
+    Type: 'AWS::Serverless::Function' # une fonction Lambda est définie, pour dire que l'application est une fonction Lambda
+    Properties: # Chaque ressource a des propriétés qui décrivent les caractéristiques de la ressource (par exemple, le runtime de la fonction, la mémoire allouée, le chemin du code, etc.)
+      Handler: 'index.handler'
+      Runtime: 'nodejs14.x'
+      CodeUri: './src'
+      MemorySize: 128
+      Timeout: 10
+  ApiGateway:
+    Type: 'AWS::Serverless::Api'
+    Properties:
+      StageName: 'prod'
+```
+
+##  Déploiement d'une application avec SAM
+**Build (compilation) de l'application**
+sam build
+or
+mvn clean package
+**Déploiement avec SAM**
+sam deploy --stack-name kupload-capacity-preprod -t template.yaml Environment=preprod --profile 567547540856_AWS-Legacy-Production-DevLambda
+
+## Test Locaux avec SAM CLI
+
+# create project aws with mvn
+mvn io.quarkus.platform:quarkus-maven-plugin:3.8.6:create -DprojectGroupId=<com.kowee.kslack> -DprojectArtifactId=<kslack> -Dextensions="<amazon-sns>"
+sam deploy --guided --profile <010330705227_AWS-Sandbox-PowerUser> Environment=<preprod>
+  Stack Name [sam-app]: MonNomDeStack
+  AWS Region [us-east-1]: eu-west-3
+sam deploy -t <template.yaml> -g --profile <10330705227_AWS-Sandbox-PowerUser> Environment=<preprod>
+sam deploy --stack-name <kslack-preprod> -t template.yaml Environment=<preprod> --profile <567547540856_AWS-Legacy-Production-DevLambda > 
+sam delete --stack-name <kupload-capacity-preprod> --profile <567547540856_AWS-Legacy-Production-DevLambda>
+
+
+
