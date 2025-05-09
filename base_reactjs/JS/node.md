@@ -65,6 +65,7 @@ sudo npm install -g n <!--Installez n (un gestionnaire de versions pour Node.js)
 sudo n stable <!--Mettez à jour Node.js à la version stable la plus récente-->
 sudo n lts <!--(Optionnel) Mettez à jour Node.js vers la version LTS-->
 
+# install nvm <!--permet de switcher des version-->
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash <!-- Utiliser Node Version Manager (NVM) (Recommandé)-->
 nvm ls-remote <!--Lister les versions disponibles-->
 nvm install node <!--Installer la dernière version stable de Node.js-->
@@ -88,6 +89,7 @@ X-Ray tracing on the function(s): N
 npm run unit <!--permet de lancer les tests(test dans l'app sam)-->
 
 # initializer un projet TypeScript
+npm install -g typescript <!--il faut installer typeScript globalement-->
 npm init -y
 npm install typescript ts-node @types/node --save-dev
     typescript : Compilateur TypeScript
@@ -98,8 +100,23 @@ npm install typeorm reflect-metadata pg
     typeorm : L'ORM principal
     reflect-metadata : Nécessaire pour les décorateurs
     pg : Pilote PostgreSQL (remplacez par mysql2, sqlite3, etc.)
+npm install axios <!--pour effectuer des requête HTTP-->
 
 
 # annotation:
 ! : Champ obligatoire (NOT NULL en base).
 ? : Champ optionnel (NULLABLE en base).
+
+# compiler le projet:
+npx tsc
+## config dans tsconfig.json: 
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "outDir": "./dist"
+  },
+  "include": ["src/**/*"]
+}

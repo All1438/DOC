@@ -184,3 +184,6 @@ git commit -m "<message>" <!--Valider le changement-->
 git checkout -- .
 git clean -fd
 
+# use token avec gitHub
+git config --global credential.helper store <!--Enregistre le token lors du prochain auth>
+
